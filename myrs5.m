@@ -33,7 +33,7 @@ for n = 1:length(TT)
         
         [y, X] = mydgp5(T,C);           % data generating process
        
-        if C == 1   
+        if C == 1
             u = X(:,2);                          % smooth variable
         elseif C ==2
             u = X(:,3);
@@ -42,35 +42,30 @@ for n = 1:length(TT)
             X = X(:,1:3);
         end
         
-        grid = linspace(0.8*min(y),0.8*max(y),100)';
-        b = myest5d(y,X,u,grid,T);  
-        beta = zeros(2*nreg-1, length(grid));                     
+        U = linspace(0.8*min(y),0.8*max(y),200)';
+        ui = [U(20); U(60); U(100);U(140); U(180)];  % initial grid point 
+        b = myest5d(y,X,u,ui,T);                                   % get initial value of beta from gamma = 0.5 for the initial grid point
    
 %%  Estimate the functional coeffient of all the grid point
        % some lines for plotting
        % bp = zeros(1,length(u0));
        % bp0 = bp;  
-      
-       for i = 1:length(grid)
-        
-            beta(:,i) = myest5a(y,X,b(:,i),u,grid(i),T,gamma);  % use IWLLS to calculate the parameters for initial point
-        
-       end
-                
+       
+       beta = myest5c(y,X,b,u,ui,U,T,nreg,gamma);                   % use IWLLS + one-step algorithm to calculate the parameters
 
 %%  Calculate the RASE(root average squared error)
-   
+      
        if C == 1
             
-           beta0 = [zeros(length(grid),1), (0.138 + (0.316+0.982*grid).*exp(-3.89*grid.^2)), -0.437 - (0.659+0.126*grid).*exp(-3.89*grid.^2)]';  % real beta   
+           beta0 = [zeros(length(U),1),(1-0.18*(U>=0)).*(0.138 + (0.316+0.982*U).*exp(-3.89*U.^2)), -0.437 - (0.659+0.126*U).*exp(-3.89*U.^2)]';  % real beta   
        
        elseif C == 2
            
-           beta0 = [zeros(T,1), 0.4*(U <= 1) - 0.8*(U > 1), -0.6*(U <= 1) + 0.8*(U > 1)]';
+           beta0 = [zeros(length(U),1),0.4*(U <= 1) - 0.8*(U > 1), -0.6*(U <= 1) + 0.8*(U > 1)]';
            
        else
            
-           beta0 = [zeros(T,1), sin(sqrt(2)*pi*U), cos(sqrt(2)*pi*U)]';
+           beta0 = [zeros(length(U),1) sin(sqrt(2)*pi*U), cos(sqrt(2)*pi*U)]';
        
        end
   %%     

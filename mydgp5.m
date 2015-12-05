@@ -3,8 +3,7 @@ function[a,b]    =  mydgp5(T, C)
   % matrix setting 
  
    Y =  zeros(T+102,1);
-   Y(1) = 0.1;
-   Y(2) = 0.1;
+   Y(2) = 1;
           
  % generate initial value of Y  
 if C == 1
