@@ -27,7 +27,7 @@ for n = 1:length(TT)
    
    for j = 1:M
 
-%%  Data generating and Initial setting
+%%  data generating and initial setting
         
         [y, X] = mydgp5(T,C);                    % data generating process
        
