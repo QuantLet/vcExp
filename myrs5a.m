@@ -10,28 +10,26 @@ close all
 
 % parameter setting
 
-M = 100;             % number of simulations
-C = 1;                  % choose the different DGP
-ng = 5;                % number of initial grid point
-nreg = 3;             % number of regressors(including 1!!!)
-gamma = 0.25;   % probability level
-TT = [200 400];          % time intervals 
-RASE = zeros(M,nreg); 
-RASE0 = zeros(2*length(TT),nreg);
+ M     = 100;                % number of simulations
+ C     = 1;                  % choose the different DGP
+ ng    = 5;                  % number of initial grid point
+ nreg  = 3;                  % number of regressors(including 1!!!)
+ gamma = 0.25;               % probability level
+ TT    = [200 400];          % time intervals 
+ RASE  = zeros(M,nreg); 
+ RASE0 = zeros(2*length(TT),nreg);
 
 %% monte carlo simulations for M times
-
-parpool('local',4);             % parallel computing tools
  
 for n = 1:length(TT)
      
    T = TT(n);
    
-   parfor j = 1:M
+   for j = 1:M
+
 %%  Data generating and Initial setting
- 
         
-        [y, X] = mydgp5(T,C);           % data generating process
+        [y, X] = mydgp5(T,C);                    % data generating process
        
         if C == 1   
             u = X(:,2);                          % smooth variable
@@ -43,7 +41,7 @@ for n = 1:length(TT)
         end
         
         grid = linspace(0.8*min(y),0.8*max(y),100)';
-        b = myest5d(y,X,u,grid,T);  
+        b    = myest5d(y,X,u,grid,T);  
         beta = zeros(2*nreg-1, length(grid));                     
    
 %%  Estimate the functional coeffient of all the grid point
@@ -73,7 +71,7 @@ for n = 1:length(TT)
            beta0 = [zeros(T,1), sin(sqrt(2)*pi*U), cos(sqrt(2)*pi*U)]';
        
        end
-  %%     
+  
        RASE(j,:) = (1/T*sum((beta(1:nreg,:) - beta0).^2,2)).^0.5;            % Calculate the root average squared error
     
    end
@@ -87,4 +85,3 @@ end
 
 % plot(u0,bp0,'k-',u0,bp,'k.')
 
-delete(gcp)
