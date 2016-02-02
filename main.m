@@ -41,7 +41,7 @@ for n = 1:length(TT)
         end
         
         grid = linspace(0.8*min(y),0.8*max(y),100)';
-        b    = myest5d(y,X,u,grid,T);  
+        b    = iniestor(y,X,u,grid,T);  
         beta = zeros(2*nreg-1, length(grid));                     
    
 %%  Estimate the functional coeffient of all the grid point
@@ -51,7 +51,7 @@ for n = 1:length(TT)
       
        for i = 1:length(grid)
         
-            beta(:,i) = myest5a(y,X,b(:,i),u,grid(i),T,gamma);  % use IWLLS to calculate the parameters for initial point
+            beta(:,i) = myest(y,X,b(:,i),u,grid(i),T,gamma);  % use IWLLS to calculate the parameters for initial point
         
        end
                 
