@@ -1,4 +1,4 @@
-function[b]=myest5d(y,X,u,ug,T)
+function[b]=myest(y,X,u,ug,T)
 
 % Variable setting 
 
