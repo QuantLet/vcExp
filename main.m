@@ -1,7 +1,7 @@
 % Title: A Semiparametric Estimation of Patially Varying-Coefficient
 % Expectile Model
 % Date: Dec 15, 2015
-% Author: Zongwu Cai, Ying Fang and Dingshi Tian
+% Author: Dingshi Tian, Kirill Efimov
 
 % clearing work&preparing
 clc
@@ -15,7 +15,7 @@ close all
  ng    = 5;                  % number of initial grid point
  nreg  = 3;                  % number of regressors(including 1!!!)
  gamma = 0.25;               % probability level
- TT    = [200 400];          % time intervals 
+ TT    = [200 400 800];      % time intervals 
  RASE  = zeros(M,nreg); 
  RASE0 = zeros(2*length(TT),nreg);
 
@@ -25,7 +25,7 @@ for n = 1:length(TT)
      
    T = TT(n);
    
-   for j = 1:M
+   parfor j = 1:M
 
 %%  data generating and initial setting
         
@@ -66,9 +66,13 @@ for n = 1:length(TT)
            
            beta0 = [zeros(T,1), 0.4*(U <= 1) - 0.8*(U > 1), -0.6*(U <= 1) + 0.8*(U > 1)]';
            
-       else
+       elseIF C == 3
            
            beta0 = [zeros(T,1), sin(sqrt(2)*pi*U), cos(sqrt(2)*pi*U)]';
+       
+       else
+           
+           disp('No such DGP') 
        
        end
   
@@ -79,7 +83,7 @@ for n = 1:length(TT)
 %% Store the parameters of each simulation
   
   RASE0(2*n-1,:) = median(RASE);
-  RASE0(2*n,:) = std(RASE); 
+  RASE0(2*n,:)   = std(RASE); 
 
 end
 
