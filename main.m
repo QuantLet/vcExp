@@ -1,9 +1,9 @@
-% Title: A Semiparametric Estimation of Patially Varying-Coefficient
-% Expectile Model
+% Title: A Varying-Coefficient Expectile Model
 % Date: Dec 15, 2015
 % Author: Dingshi Tian, Kirill Efimov
 
 % clearing work&preparing
+
 clc
 clear
 close all
@@ -88,4 +88,3 @@ for n = 1:length(TT)
 end
 
 % plot(u0,bp0,'k-',u0,bp,'k.')
-
