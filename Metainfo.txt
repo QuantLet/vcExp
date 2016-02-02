@@ -1,0 +1,17 @@
+Name of Quantlet: VCCARE
+
+Published in: A Varying-Coefficient Expectile Model
+
+Description: Estimate the parameters in a Varying-Coefficient CARE Model
+
+Keywords: expectile, nonparametric estimation, bandwidth, local linear, time varying 
+
+Author: Dingshi Tian, Kirill Efimov
+
+Submitted: Wed, Feb 02 2016 by Dingshi Tian
+
+Input: 
+
+Output: 
+
+Example: 
