@@ -10,7 +10,7 @@ close all
 
 % parameter setting
 
- M     = 100;                % number of simulations
+ M     = 500;                % number of simulations
  C     = 1;                  % choose the different DGP
  ng    = 5;                  % number of initial grid point
  nreg  = 3;                  % number of regressors(including 1!!!)
