@@ -1,4 +1,4 @@
-function[beta]=myest5a(y,X,b,u,ug,T,gamma)
+function[beta]=myest(y,X,b,u,ug,T,gamma)
 
 %% Variable setting 
 
@@ -39,3 +39,4 @@ end
 % Calculate the final resultx
 
 beta = bx;
+return(beta)
