@@ -66,7 +66,7 @@ for n = 1:length(TT)
            
            beta0 = [zeros(T,1), 0.4*(U <= 1) - 0.8*(U > 1), -0.6*(U <= 1) + 0.8*(U > 1)]';
            
-       elseIF C == 3
+       elseif C == 3
            
            beta0 = [zeros(T,1), sin(sqrt(2)*pi*U), cos(sqrt(2)*pi*U)]';
        
