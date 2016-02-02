@@ -25,4 +25,6 @@ for i = 1:length(ug)
     b(:,i) = S \ R;
     
 end
+
+return(b)
  
