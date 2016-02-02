@@ -2,18 +2,14 @@ Name of Quantlet: VCCARE
 
 Published in:     A Varying-Coefficient Expectile Model
 
-Description:      Estimate the parameters in a Varying-Coefficient CARE Model
+Description:      Estimate the parameters in a Varying-Coefficient CARE Model using local linear regresion.
 
 Keywords:         expectile, nonparametric estimation, bandwidth, local linear, time varying
-
-See also:         
 
 Author:           Dingshi Tian, Kirill Efimov
 
 Submitted:        Wed, Feb 02 2016 by Dingshi Tian
 
-Input: 
-
-Output: 
-
-Example: 
+Example:          
+- 1. VC EXPAR model
+- 2. classic sin-cos model
