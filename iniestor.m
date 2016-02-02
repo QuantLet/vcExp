@@ -7,6 +7,8 @@ bd02  = 1.06*std(y)*T^(-0.2);
 b     = zeros(2*c-1,length(ug));
 S     = zeros(2*c-1,2*c-1);
 R     = zeros(2*c-1,1);
+ 
+% obatain the initial value of estimators 
     
 for i = 1:length(ug)
    
@@ -27,4 +29,3 @@ for i = 1:length(ug)
 end
 
 return(b)
- 
