@@ -1,4 +1,4 @@
-function[a,b] = mydgp5(T, C)
+function[a,b] = mydgp(T, C)
 
   % matrix setting 
  
@@ -6,7 +6,7 @@ Y    = zeros(T+102,1);
 Y(2) = 1;
           
  % generate initial value of Y  
-if C == 1
+if C == 1                               % Example 1
     
    for t = 1:(T+100)
             
@@ -16,12 +16,12 @@ if C == 1
       eps    = normrnd(0,0.2);
       Y(t+2) = Y(t+1)*a1 + Y(t)*a2 + 2*a1*Y(t+1)*eps*(uu>=0);
           
-     end
+    end
      
     a = Y(103:T+102);                               % Y(t):delete the first 100 values
     b = [ones(T,1),Y(102:T+101),Y(101:T+100)];      % X(t) = [1, Y(t-1), Y(t-2)]
  
-elseif C == 2
+elseif C == 2                            % Example 2
 
     for t = 1:(T+100)
         
@@ -35,7 +35,7 @@ elseif C == 2
     a = Y(103:T+102);                               % Y(t):delete the first 100 values
     b = [ones(T,1),Y(102:T+101),Y(101:T+100)];      % X(t) = [1, Y(t-1), Y(t-2)]
 
-else
+elseif C == 3                             % Example 3
     
     uu = zeros(T+100,1);
     
@@ -51,9 +51,13 @@ else
         else
              eps = normrnd(-5, 1/sqrt(0.05));
         end
+        
         Y(t+2) = a1*Y(t+1) + a2*Y(t) +eps;
+        
     end
+    
     a = Y(103:T+102);                                             % Y(t):delete the first 100 values
     b = [ones(T,1),Y(102:T+101),Y(101:T+100),uu(101:T+100)];      % X(t) = [1, Y(t-1), Y(t-2),U]
+
 end
  
