@@ -29,7 +29,7 @@ for n = 1:length(TT)
 
 %%  data generating and initial setting
         
-        [y, X] = mydgp5(T,C);                    % data generating process
+        [y, X] = mydgp(T,C);                    % data generating process
        
         if C == 1   
             u = X(:,2);                          % smooth variable
