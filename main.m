@@ -19,10 +19,8 @@ close all
 
 % monte carlo simulations for M times
 for n = 1:length(TT)
-   T = TT(n);
-   parfor j = 1:M
-
-%  data generating and initial setting
+    T = TT(n);
+    parfor j = 1:M
         [y, X] = mydgp(T,C);                    % data generating process
         if C == 1   
             u = X(:,2);                          % smooth variable
@@ -41,7 +39,7 @@ for n = 1:length(TT)
        % bp = zeros(1,length(u0));
        % bp0 = bp;  
        for i = 1:length(grid)
-            beta(:,i) = myest(y,X,b(:,i),u,grid(i),T,gamma);  % use IWLLS to calculate the parameters for initial point
+           beta(:,i) = myest(y,X,b(:,i),u,grid(i),T,gamma);  % use IWLLS to calculate the parameters for initial point
        end
                 
 %%  Calculate the RASE(root average squared error)
@@ -55,11 +53,11 @@ for n = 1:length(TT)
            disp('No such DGP') 
        end
        RASE(j,:) = (1/T*sum((beta(1:nreg,:) - beta0).^2,2)).^0.5;            % Calculate the root average squared error
-   end
+    end
    
 %% Store the parameters of each simulation
-  RASE0(2*n-1,:) = median(RASE);
-  RASE0(2*n,:)   = std(RASE); 
+    RASE0(2*n-1,:) = median(RASE);
+    RASE0(2*n,:)   = std(RASE); 
 end
 
 % plot(u0,bp0,'k-',u0,bp,'k.')
