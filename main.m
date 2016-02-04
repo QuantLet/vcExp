@@ -32,7 +32,7 @@ for n = 1:length(TT)
         end
         grid = linspace(0.8*min(y), 0.8*max(y), 100)';
         b    = iniestor(y, X, u, grid, T);  
-        beta = zeros(2*nreg-1, length(grid));                     
+        beta = zeros(2*nreg - 1, length(grid));                     
    
 %  Estimate the functional coeffient of all the grid point
        % some lines for plotting
