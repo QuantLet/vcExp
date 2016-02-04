@@ -15,7 +15,7 @@ k  = 0;
 % Iterate to obatain the estimator of convergence
 while((norm(abs(b0 - bx)) > 1e-5)&&(k <= 1000))   
     eps = y - z*bx;
-    for t = 1:T
+    for t = 1 : T
         we       = abs(gamma - (eps(t) <= 0));
         kernel01 = 1/sqrt(2*pi)*exp(-0.5*((u(t) - ug)/bd01)^2);
         s        = we*kernel01*z(t, :)'*z(t, :);
