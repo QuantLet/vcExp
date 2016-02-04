@@ -39,13 +39,13 @@ for n = 1:length(TT)
        % bp = zeros(1,length(u0));
        % bp0 = bp;  
        for i = 1:length(grid)
-           beta(:, i) = myest(y, X, b(:, i), u, grid(i), T, gamma);  % use IWLLS to calculate the parameters for initial point
+           beta(:, i) = myest(y, X, b(:, i), u, grid(i), T, gamma);           % use IWLLS to calculate the parameters for initial point
        end
                 
 %%  Calculate the RASE(root average squared error)
        if C == 1
            beta0 = [zeros(length(grid), 1), (0.138 + (0.316 + 0.982*grid).*exp(-3.89*grid.^2)),...
-                   ...-0.437 - (0.659 + 0.126*grid).*exp(-3.89*grid.^2)]';  % real beta   
+                   ...-0.437 - (0.659 + 0.126*grid).*exp(-3.89*grid.^2)]';     % real beta   
        elseif C == 2
            beta0 = [zeros(T, 1), 0.4*(U <= 1) - 0.8*(U > 1), -0.6*(U <= 1) + 0.8*(U > 1)]';
        elseif C == 3
