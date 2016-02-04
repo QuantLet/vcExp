@@ -39,7 +39,7 @@ for n = 1:length(TT)
        % bp = zeros(1,length(u0));
        % bp0 = bp;  
        for i = 1:length(grid)
-           beta(:,i) = myest(y, X, b(:,i), u, grid(i), T, gamma);  % use IWLLS to calculate the parameters for initial point
+           beta(:, i) = myest(y, X, b(:,i), u, grid(i), T, gamma);  % use IWLLS to calculate the parameters for initial point
        end
                 
 %%  Calculate the RASE(root average squared error)
@@ -52,7 +52,7 @@ for n = 1:length(TT)
        else
            disp('No such DGP') 
        end
-       RASE(j,:) = (1/T*sum((beta(1:nreg, :) - beta0).^2, 2)).^0.5;            % Calculate the root average squared error
+       RASE(j, :) = (1/T*sum((beta(1:nreg, :) - beta0).^2, 2)).^0.5;            % Calculate the root average squared error
     end
    
 %% Store the parameters of each simulation
