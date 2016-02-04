@@ -9,12 +9,12 @@ R      = zeros(2*c-1, 1);
  
 % obatain the initial value of estimators 
 for i = 1:length(ug)
-    z = [X(:,1), X(:,2), X(:,3), X(:,2).*(u-ug(i)), X(:,3).*(u-ug(i))];
+    z = [X(:, 1), X(:, 2), X(:, 3), X(:, 2).*(u-ug(i)), X(:, 3).*(u-ug(i))];
     for t = 1:T
         kernel01 = 1/sqrt(2*pi)*exp(-0.5*((u(t)-ug(i))/bd02)^2);
-        s        = kernel01*z(t,:)'*z(t,:);
+        s        = kernel01*z(t, :)'*z(t, :);
         S        = s + S;
-        r        = kernel01*z(t,:)'*y(t);
+        r        = kernel01*z(t, :)'*y(t);
         R        = r + R;
     end
     b(:, i) = S\R;
