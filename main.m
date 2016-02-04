@@ -24,7 +24,7 @@ for n = 1:length(TT)
         [y, X] = mydgp(T, C);                    % data generating process
         if C == 1   
             u = X(:, 2);                          % smooth variable
-        elseif C ==2
+        elseif C == 2
             u = X(:, 3);
         else 
             u = X(:, 4);
