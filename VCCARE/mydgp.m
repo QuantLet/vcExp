@@ -23,7 +23,7 @@ elseif C == 2                            % Example 2
         Y(t + 2) = Y(t + 1)*a1 + Y(t)*a2 + normrnd(0, 1);
     end
     a = Y(103 : T + 102);                               % Y(t):delete the first 100 values
-    b = [ones(T, 1),Y(102 : T + 101),Y(101 : T + 100)];      % X(t) = [1, Y(t-1), Y(t-2)]
+    b = [ones(T, 1), Y(102 : T + 101), Y(101 : T + 100)];      % X(t) = [1, Y(t-1), Y(t-2)]
 elseif C == 3                             % Example 3
     uu = zeros(T + 100, 1);
     for t = 1 : (T + 100)
