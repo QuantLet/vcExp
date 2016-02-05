@@ -11,5 +11,5 @@ Author:           Dingshi Tian, Kirill Efimov
 Submitted:        Wed, Feb 02 2016 by Dingshi Tian
 
 Example:          
-- 1. VC EXPAR model
-- 2. classic sin-cos model
+- VC EXPAR model
+- Classic sin-cos model
