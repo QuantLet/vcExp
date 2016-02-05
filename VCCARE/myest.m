@@ -26,7 +26,7 @@ while((norm(abs(b0 - bx)) > 1e-5)&&(k <= 1000))
    bs = S\R;
    b0 = bx;
    bx = bs;
-   k  = k+1;
+   k  = k + 1;
 end
 
 % Calculate the final resultx
