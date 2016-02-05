@@ -8,7 +8,7 @@ R      = zeros(2*c - 1, 1);
 
 % Calculate the initial estimators
 bx = b;
-b0 = zeros(2*c - 1,1);
+b0 = zeros(2*c - 1, 1);
 z  = [X(:, 1),X(:, 2),X(:, 3), X(:, 2).*(u - ug), X(:, 3).*(u - ug)];
 k  = 0;
 
