@@ -1,6 +1,6 @@
 Name of Quantlet: VCCARE
 
-Published in:     A Varying-Coefficient Expectile Model
+Published in:     Unpublished; A Varying-Coefficient Expectile Model
 
 Description:      Estimate the parameters in a Varying-Coefficient CARE Model using local linear regresion.
 
