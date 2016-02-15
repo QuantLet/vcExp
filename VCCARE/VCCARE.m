@@ -16,7 +16,8 @@ close all
  TT    = [200 400 800];      % time intervals 
  RASE  = zeros(M, nreg); 
  RASE0 = zeros(2*length(TT), nreg);
- 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function[a, b] = mydgp(T, C)           % sub-functions for data generating
 
 % matrix setting 
@@ -61,7 +62,10 @@ elseif C == 3                             % Example 3
     a = Y(103 : T + 102);                                             % Y(t):delete the first 100 values
     b = [ones(T, 1),Y(102 : T + 101), Y(101 : T + 100), uu(101 : T + 100)];      % X(t) = [1, Y(t-1), Y(t-2),U]
 end
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function[b]=myest(y, X, u, ug, T)              % Obtaining initial estimators
 
 % Variable setting 
@@ -85,6 +89,46 @@ for i = 1:length(ug)
 end
 
 return(b)
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+function[beta]=myest(y, X, b, u, ug, T, gamma)   % IWLLS Estimating Process 
+
+% Variable setting 
+bd01   = 1.06*std(y)*T^(-0.2);
+[~, c] = size(X);
+S      = zeros(2*c - 1, 2*c - 1);
+R      = zeros(2*c - 1, 1);
+
+% Calculate the initial estimators
+bx = b;
+b0 = zeros(2*c - 1, 1);
+z  = [X(:, 1),X(:, 2),X(:, 3), X(:, 2).*(u - ug), X(:, 3).*(u - ug)];
+k  = 0;
+
+% Iterate to obatain the estimator of convergence
+while((norm(abs(b0 - bx)) > 1e-5)&&(k <= 1000))   
+    eps = y - z*bx;
+    for t = 1 : T
+        we       = abs(gamma - (eps(t) <= 0));
+        kernel01 = 1/sqrt(2*pi)*exp(-0.5*((u(t) - ug)/bd01)^2);
+        s        = we*kernel01*z(t, :)'*z(t, :);
+        S        = s + S;
+        r        = we*kernel01*z(t, :)'*y(t);
+        R        = r + R;
+    end
+   bs = S\R;
+   b0 = bx;
+   bx = bs;
+   k  = k + 1;
+end
+
+% Calculate the final resultx
+beta = bx;
+return(beta)
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 % monte carlo simulations for M times
 for n = 1:length(TT)
