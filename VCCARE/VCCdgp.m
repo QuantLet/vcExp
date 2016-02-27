@@ -1,4 +1,4 @@
-function[a, b] = mydgp(T, C)
+function[a, b] = VCCdgp(T, C)
 
 % matrix setting 
 Y    = zeros(T + 102, 1);
